@@ -31,22 +31,22 @@ function Button({ children, onClick }) {
 
 export default function App() {
   const [friends, setFriends] = useState(initialFriends);
-  const [showAddFriend, setShowAddFriend] = useState(false);
+  const [isShowAddFriend, setIsShowAddFriend] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
 
   function handleShowAddFriend() {
-    setShowAddFriend((show) => !show);
+    setIsShowAddFriend((show) => !show);
   }
 
   function handleAddFriend(friend) {
     setFriends((friends) => [...friends, friend]);
-    setShowAddFriend(false);
+    setIsShowAddFriend(false);
   }
 
   function handleSelection(friend) {
     // setSelectedFriend(friend);
-    setSelectedFriend((cur) => (cur?.id === friend.id ? null : friend));
-    setShowAddFriend(false);
+    setSelectedFriend((current) => (current?.id === friend.id ? null : friend));
+    setIsShowAddFriend(false);
   }
 
   function handleSplitBill(value) {
@@ -72,10 +72,10 @@ export default function App() {
           selectedFriend={selectedFriend}
         />
 
-        {showAddFriend && <FormAddFriend onAddFriend={handleAddFriend} />}
+        {isShowAddFriend && <FormAddFriend onAddFriend={handleAddFriend} />}
 
         <Button onClick={handleShowAddFriend}>
-          {showAddFriend ? "Close" : "Add friend"}
+          {isShowAddFriend ? "Close" : "Add friend"}
         </Button>
       </div>
       {selectedFriend && (
